@@ -1,5 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
+import NotifyMe from '../WebNotification';
 
-const Home = () => <h1>Hello World</h1>
+export default class Home extends Component {
 
-export default  Home;
+    constructor() {
+        super();
+        this.handlerClick.bind(this);
+        new NotifyMe().init();
+    }
+
+
+    handlerClick(event) {
+        event.preventDefault();
+        new NotifyMe().customNotification();
+    }
+
+    render() {
+        return(
+            <div>
+                <h1>Home Page</h1>
+                <button onClick={this.handlerClick}>Notifique me!</button>
+            </div>
+        );
+    }
+}
