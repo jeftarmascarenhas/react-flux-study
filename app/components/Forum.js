@@ -4,6 +4,7 @@ import ForumHeader from './ForumHeader';
 import ForumQuestion from './ForumQuestion';
 import ForumAnswers from './ForumAnswers';
 import ForumAddAnswerBox from './ForumAddAnswerBox';
+import ForumDispatcher from '../ForumDispatcher';
 import NotifyMe from '../WebNotification';
 
 export default class Forum extends Component {
@@ -24,16 +25,23 @@ export default class Forum extends Component {
 
     componentDidMount() {
             let resp = {
-                questionOne: {
+                "1": {
                     body:'React lib for create components and flux arquithecture!',
                     currect: false
                 },
-                questionTwo: {
+                "2": {
                     body:'React end framework components and flux is a lib!',
                     currect: false
                 }
             };
             this.setState({ allAnswers: resp });
+    }
+
+    _onAddAnswer(answerText) {
+        ForumDispatcher.dispatch({
+            actionType:'FORUM_ANSWER_ADD',
+            newAnswer: answerText
+        });
     }
 
     render() {
@@ -47,7 +55,7 @@ export default class Forum extends Component {
                     <ForumAnswers allAnswers={this.state.allAnswers} />
                     <hr />
                     <h4>Add an answer</h4>
-                    <ForumAddAnswerBox />
+                    <ForumAddAnswerBox onAddAnswer={this._onAddAnswer} />
                     {/*<button onClick={this.handlerClick}>Notifique me!</button>*/}
                     <br/>
                 </div>
