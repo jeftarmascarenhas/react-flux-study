@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ForumDispatcher from '../ForumDispatcher';
+import ForumDispatcher from '../dispatcher/ForumDispatcher';
 import ForumAnswer from './ForumAnswer';
 
 

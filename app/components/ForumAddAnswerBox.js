@@ -11,7 +11,6 @@ export default class ForumAddAnswerBox extends Component {
     }
 
     addAnswer(event) {
-        console.log(this.textarea);
         this.props.onAddAnswer(this.state.value);
     }
 

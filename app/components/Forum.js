@@ -4,14 +4,15 @@ import ForumHeader from './ForumHeader';
 import ForumQuestion from './ForumQuestion';
 import ForumAnswers from './ForumAnswers';
 import ForumAddAnswerBox from './ForumAddAnswerBox';
-import ForumDispatcher from '../ForumDispatcher';
+import ForumDispatcher from '../dispatcher/ForumDispatcher';
+import ForumStore from '../stores/ForumStore';
 import NotifyMe from '../WebNotification';
 
 export default class Forum extends Component {
 
     constructor() {
         super();
-        this.state = { allAnswers:{} }
+        this.state = { allAnswers: ForumStore.getAnswers() }
         this.handlerClick = this.handlerClick.bind(this);
 
         new NotifyMe().init();
@@ -21,20 +22,6 @@ export default class Forum extends Component {
     handlerClick(event) {
         event.preventDefault();
         new NotifyMe().customNotification();
-    }
-
-    componentDidMount() {
-            let resp = {
-                "1": {
-                    body:'React lib for create components and flux arquithecture!',
-                    currect: false
-                },
-                "2": {
-                    body:'React end framework components and flux is a lib!',
-                    currect: false
-                }
-            };
-            this.setState({ allAnswers: resp });
     }
 
     _onAddAnswer(answerText) {
