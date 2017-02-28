@@ -13,6 +13,7 @@ export default class ForumAnswer extends Component {
 
     render(){
         let answer = this.props.answer;
+        console.log('answer ', answer);
         return(
             <div className="card mb-3">
                 <div className="card-block">
@@ -28,4 +29,8 @@ export default class ForumAnswer extends Component {
             </div>
         );
     }
+}
+
+ForumAnswer.propType = {
+    answer: React.PropTypes.object.isRequired
 }

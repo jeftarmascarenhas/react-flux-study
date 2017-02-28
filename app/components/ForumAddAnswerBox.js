@@ -7,25 +7,46 @@ export default class ForumAddAnswerBox extends Component {
         this.state = { value:'' };
         this.addAnswer = this.addAnswer.bind(this);
         this._onChange = this._onChange.bind(this);
+        this.isValid = this.isValid.bind(this);
     }
 
-    addAnswer() {
-        console.log(this.state.value);
+    addAnswer(event) {
+        console.log(this.textarea);
         this.props.onAddAnswer(this.state.value);
     }
 
     _onChange (event) {
-        console.log(event.target.value);
+        let isValid = this.isValid(event.target);
+
         this.setState({
             value: event.target.value
         });
+
+
+    }
+
+    isValid(input) {
+        if(input.required != null && input.value === '') {
+            input.classList.add('error');
+            input.nextSibling.textContent = 'Por favor informe sua resposta';
+            return false;
+        }
+        else {
+            input.classList.remove('error');
+            input.nextSibling.textContent = '';
+        }
     }
 
     render() {
         return(
             <div className="row">
-                <textarea id="andAnswer" onChange={ this._onChange } className="col-md-6 col-xs-8">
-                </textarea>
+                <div className="col-md-6 col-xs-4">
+                    <div className="form-group">
+                        <textarea id="andAnswer" className="form-control" onChange={ this._onChange } required>
+                        </textarea>
+                        <p></p>
+                    </div>
+                </div>
                 <div className="col-md-6 col-xs-8">
                     <input type="button" className="btn btn-primary" value="Add" onClick={ this.addAnswer }/>
                 </div>
