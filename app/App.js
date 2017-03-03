@@ -9,20 +9,3 @@ import ForumDispatcher from './dispatcher/ForumDispatcher';
 import Forum from './components/Forum';
 
 ReactDOM.render(<Forum />, document.getElementById('app'));
-
-let myemiiter =  new EventEmitter();
-
-myemiiter.on('STARTED_THE_APP', () => {
-    console.log('started the app');
-});
-
-myemiiter.on('STARTED_THE_APP', () => {
-    console.log('started the app #2');
-});
-
-myemiiter.emit('STARTED_THE_APP');
-
-ForumDispatcher.register( action => {
-    console.log('received an action');
-    console.log(action);
-});

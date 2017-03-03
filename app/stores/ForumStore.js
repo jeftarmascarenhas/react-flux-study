@@ -1,4 +1,7 @@
 import EventEmitter from '../EventEmitter';
+import Dispatcher from '../Dispatcher';
+import ForumDispatcher from '../dispatcher/ForumDispatcher';
+
 let answerData = {
                 "1": {
                     body:'React lib for create components and flux arquithecture!',
@@ -24,10 +27,28 @@ export default class ForumStore extends EventEmitter {
     }
 
     static markAsCorrect(id) {
-        for (key in answerData) {
+        for (var key in answerData) {
             answerData[key].correct = false;
         }
 
         answerData[id].correct = true;
     }
+
 }
+
+ForumDispatcher.register( action => {
+    console.log('received an action');
+    console.log(action);
+    switch(action.actionType) {
+        case 'FORUM_ANSWER_ADD':{
+            console.log('Answer added!');
+            ForumStore.addAnswerData(action.newAnswer);
+            break;
+        }
+        case 'FORUM_ANSWER_MARKED_CORRECT': {
+            console.log('MARKED_CORRECT', action.id);
+            ForumStore.markAsCorrect(action.id);
+            break;
+        }
+    }
+});
