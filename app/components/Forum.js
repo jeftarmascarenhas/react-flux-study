@@ -8,16 +8,25 @@ import ForumDispatcher from '../dispatcher/ForumDispatcher';
 import ForumStore from '../stores/ForumStore';
 import NotifyMe from '../WebNotification';
 
+let forumStore = new ForumStore;
+
 export default class Forum extends Component {
 
     constructor() {
         super();
-        this.state = { allAnswers: ForumStore.getAnswers() }
+        this.state = { allAnswers: forumStore.getAnswers() }
         this.handlerClick = this.handlerClick.bind(this);
 
         new NotifyMe().init();
     }
 
+    componentDidMount() {
+        forumStore.addChangeListener(this._onChange);
+    }
+
+    componentWillUnmount() {
+        forumStore.removeListener(this._onChange);
+    }
 
     handlerClick(event) {
         event.preventDefault();
@@ -29,6 +38,10 @@ export default class Forum extends Component {
             actionType:'FORUM_ANSWER_ADD',
             newAnswer: answerText
         });
+    }
+
+    _onChange() {
+        this.setState({allAnswers: forumStore.getAnswers()});
     }
 
     render() {

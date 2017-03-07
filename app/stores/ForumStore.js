@@ -14,24 +14,39 @@ let answerData = {
             };
 
 export default class ForumStore extends EventEmitter {
+    constructor() {
+        super();
+        this.getAnswers = this.getAnswers.bind(this);
+    }
 
-    static getAnswers() {
+    emitChange() {
+        this.emit('change');
+    }
+
+    addChangeListener(listener) {
+        this.on('change', listener);
+    }
+
+    getAnswers() {
         return answerData;
     }
 
-    static addAnswerData(newAnswer) {
+    addAnswerData(newAnswer) {
         answerData[Object.keys(newAnswer).length + 1] = {
             body: newAnswer,
             correct:false
         }
+
+        this.emitChange();
     }
 
-    static markAsCorrect(id) {
+    markAsCorrect(id) {
         for (var key in answerData) {
             answerData[key].correct = false;
         }
 
         answerData[id].correct = true;
+        this.emitChange();
     }
 
 }

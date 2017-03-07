@@ -5,6 +5,7 @@ export default class EventEmitter {
     }
 
     on(type, listener){
+        console.log(this._events);
         this._events[type] = this._events[type] || [];
         this._events[type].push(listener);
     }

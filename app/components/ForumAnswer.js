@@ -14,16 +14,27 @@ export default class ForumAnswer extends Component {
     render(){
         let answer = this.props.answer;
         console.log('answer ', answer);
+
+        var markAnswer;
+        if(!answer.correct) {
+            markAnswer = <div className="pull-right">
+                            <small>
+                                <a href="#" onClick={this._markCorrect}>Mark as correct</a>
+                            </small>
+                        </div>;
+        }
+
+        var classNames = 'panel-body';
+        if(answer.correct) {
+            classNames += 'bg-success';
+        }
+
         return(
             <div className="card mb-3">
                 <div className="card-block">
                     <div className="card-text">
                         {answer.body}
-                        <div className="pull-right">
-                            <small>
-                                <a href="#" onClick={this._markCorrect}>Mark as correct</a>
-                            </small>
-                        </div>
+                        {markAnswer}
                     </div>
                 </div>
             </div>
