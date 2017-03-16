@@ -41,7 +41,8 @@ export default class Forum extends Component {
     }
 
     _onChange() {
-        this.setState({allAnswers: forumStore.getAnswers()});
+        console.log('_onChange')
+        this.setState({ allAnswers: forumStore.getAnswers() });
     }
 
     render() {

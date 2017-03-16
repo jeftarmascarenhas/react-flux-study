@@ -13,9 +13,9 @@ export default class ForumAnswer extends Component {
 
     render(){
         let answer = this.props.answer;
-        console.log('answer ', answer);
 
         var markAnswer;
+        console.log(answer.correct);
         if(!answer.correct) {
             markAnswer = <div className="pull-right">
                             <small>
@@ -24,7 +24,8 @@ export default class ForumAnswer extends Component {
                         </div>;
         }
 
-        var classNames = 'panel-body';
+        var classNames = 'card-block';
+
         if(answer.correct) {
             classNames += 'bg-success';
         }
@@ -32,7 +33,7 @@ export default class ForumAnswer extends Component {
         return(
             <div className="card mb-3">
                 <div className="card-block">
-                    <div className="card-text">
+                    <div className={    classNames }>
                         {answer.body}
                         {markAnswer}
                     </div>

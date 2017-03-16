@@ -16,7 +16,6 @@ let answerData = {
 export default class ForumStore extends EventEmitter {
     constructor() {
         super();
-        this.getAnswers = this.getAnswers.bind(this);
     }
 
     emitChange() {
@@ -24,6 +23,7 @@ export default class ForumStore extends EventEmitter {
     }
 
     addChangeListener(listener) {
+        debugger;
         this.on('change', listener);
     }
 
@@ -37,6 +37,8 @@ export default class ForumStore extends EventEmitter {
             correct:false
         }
 
+        console.log(answerData);
+
         this.emitChange();
     }
 
@@ -45,11 +47,15 @@ export default class ForumStore extends EventEmitter {
             answerData[key].correct = false;
         }
 
+        console.log('markAsCorrect OPA', answerData);
+
         answerData[id].correct = true;
         this.emitChange();
     }
 
 }
+
+let forumStore = new ForumStore();
 
 ForumDispatcher.register( action => {
     console.log('received an action');
@@ -57,12 +63,12 @@ ForumDispatcher.register( action => {
     switch(action.actionType) {
         case 'FORUM_ANSWER_ADD':{
             console.log('Answer added!');
-            ForumStore.addAnswerData(action.newAnswer);
+            forumStore.addAnswerData(action.newAnswer);
             break;
         }
         case 'FORUM_ANSWER_MARKED_CORRECT': {
             console.log('MARKED_CORRECT', action.id);
-            ForumStore.markAsCorrect(action.id);
+            forumStore.markAsCorrect(action.id);
             break;
         }
     }
