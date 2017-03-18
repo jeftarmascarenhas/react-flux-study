@@ -16,7 +16,6 @@ export default class ForumAddAnswerBox extends Component {
 
     _onChange (event) {
         let isValid = this.isValid(event.target);
-
         this.setState({
             value: event.target.value
         });

@@ -10,12 +10,24 @@ import NotifyMe from '../WebNotification';
 
 let forumStore = new ForumStore;
 
+let answerData = {
+                "1": {
+                    body:'React lib for create components and flux arquithecture!',
+                    correct: false
+                },
+                "2": {
+                    body:'React end framework components and flux is a lib!',
+                    correct: false
+                }
+            };
+
 export default class Forum extends Component {
 
     constructor() {
         super();
         this.state = { allAnswers: forumStore.getAnswers() }
         this.handlerClick = this.handlerClick.bind(this);
+        this._onChange = this._onChange.bind(this);
 
         new NotifyMe().init();
     }
@@ -41,7 +53,6 @@ export default class Forum extends Component {
     }
 
     _onChange() {
-        console.log('_onChange')
         this.setState({ allAnswers: forumStore.getAnswers() });
     }
 

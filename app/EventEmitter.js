@@ -5,14 +5,15 @@ export default class EventEmitter {
     }
 
     on(type, listener){
+        console.log('event On');
         this._events[type] = this._events[type] || [];
         this._events[type].push(listener);
     }
 
     emit(type) {
+        this._events[type];
         if(this._events[type]) {
             this._events[type].forEach(listener => {
-                console.log('listener',listener)
                 listener();
             });
         }
