@@ -53,6 +53,7 @@ export default class ForumStore {
 let forumStore = new ForumStore();
 
 ForumDispatcher.register( action => {
+    console.log('action: ', action);
     switch(action.actionType) {
         case 'FORUM_ANSWER_ADD':{
             forumStore.addAnswerData(action.newAnswer);

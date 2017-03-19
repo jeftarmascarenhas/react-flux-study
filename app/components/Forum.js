@@ -4,11 +4,12 @@ import ForumHeader from './ForumHeader';
 import ForumQuestion from './ForumQuestion';
 import ForumAnswers from './ForumAnswers';
 import ForumAddAnswerBox from './ForumAddAnswerBox';
-import ForumDispatcher from '../dispatcher/ForumDispatcher';
 import ForumStore from '../stores/ForumStore';
+import ForumActions from '../actions/ForumActions';
 import NotifyMe from '../WebNotification';
 
 let forumStore = new ForumStore;
+let forumActions = new ForumActions;
 
 let answerData = {
                 "1": {
@@ -46,10 +47,7 @@ export default class Forum extends Component {
     }
 
     _onAddAnswer(answerText) {
-        ForumDispatcher.dispatch({
-            actionType:'FORUM_ANSWER_ADD',
-            newAnswer: answerText
-        });
+        forumActions.addAnswer(answerText);
     }
 
     _onChange() {

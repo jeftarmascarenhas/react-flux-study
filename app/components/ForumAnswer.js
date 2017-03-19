@@ -27,7 +27,7 @@ export default class ForumAnswer extends Component {
         var classNames = 'card-block';
 
         if(answer.correct) {
-            classNames += ' bg-success';
+            classNames += ' text-white bg-success';
         }
 
         return(
