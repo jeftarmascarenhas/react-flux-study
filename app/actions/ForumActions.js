@@ -5,7 +5,6 @@ let forumConstants = new ForumConstants();
 
 export default class ForumActions {
   markAsCorrect(id) {
-    console.log('vasf> ', id);
     ForumDispatcher.dispatch({
       actionType: ForumConstants.FORUM_ANSWER_MARKED_CORRECT(),
       id: id

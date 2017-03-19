@@ -17,12 +17,10 @@ let eventemiter = new EventEmitter();
 export default class ForumStore {
 
     emitChange() {
-        console.log('teste');
         eventemiter.emit('change');
     }
 
     addChangeListener(listener) {
-        console.log('change');
         eventemiter.on('change', listener);
     }
 
@@ -53,7 +51,6 @@ export default class ForumStore {
 let forumStore = new ForumStore();
 
 ForumDispatcher.register( action => {
-    console.log('action: ', action);
     switch(action.actionType) {
         case 'FORUM_ANSWER_ADD':{
             forumStore.addAnswerData(action.newAnswer);
